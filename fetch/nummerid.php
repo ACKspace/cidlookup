@@ -11,7 +11,7 @@ function fetch_nummerid( $_arrNumberInfo )
     
     if ( !preg_match( '/<tr class="result_row2">\s*<td class="result_colom" colspan="2">.*?<\/td>\s*<td class="result_colom" colspan="2">\s*(.*?)\s*<\/td>/si', $strPage, $matches ))
         return false;
-    return "(old) ".$matches[1];
+    return "[old] ".$matches[1];
     
     /*
     <tr class="result_row2">

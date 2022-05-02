@@ -9,7 +9,7 @@ function fetch_nationaletelefoongids( $_arrNumberInfo )
     if ( !preg_match( '/<span class="counter-count" data-value="(.*?)">.*?<\/span>/si', $strPage, $matches ))
         return false;
     $score = round($matches[1] * 2, 1 );
-    return "({$score}) {$_arrNumberInfo['international']}";
+    return "[{$score}] unknown";
     
     /*
     <span class="counter-count" data-value="1.9">0.0</span>    

@@ -11,7 +11,7 @@ function fetch_nummerzoeker( $_arrNumberInfo )
     
     if ( !preg_match( '/<tr class="c0">\s*<td class="nowrap">.*?<\/td>\s*<td class="nowrap">.*?<\/td>\s*<td>(.*?)<\/td>/si', $strPage, $matches ))
         return false;
-    return "(com) ".$matches[1];
+    return "[com] ".$matches[1];
     
     /*
     <tr class="c0">

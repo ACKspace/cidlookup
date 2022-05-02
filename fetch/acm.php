@@ -13,7 +13,7 @@ function fetch_acm( $_arrNumberInfo )
 
     if ( !preg_match( "/<strong>Huidige aanbieder<\/strong>.*?<p>(.*?)<\/p>/si", $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$_arrNumberInfo['international']}";
+    return "[{$matches[1]}] unknown";
 
     /*
     */

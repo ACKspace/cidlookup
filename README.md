@@ -9,7 +9,7 @@ Caller ID lookup backend for FreeSWITCH's mod_cidlookup
 const CID_API_KEY = "<your_desired_key>";
 ?>
 ```
-* make sure the web directory is writable by `www-data` or create writable `freeswitch_cidlookup.db` in the web directory
+* make sure the web directory is writable ( `chmod 775 .;chown :www-data .` or create writable `freeswitch_cidlookup.db` in the web directory
 * upload or create `contacts.vcf` in the web directory
 * create the tables that are needed within FreeSSWITCH:
 ```

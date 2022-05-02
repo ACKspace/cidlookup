@@ -8,7 +8,7 @@ function fetch_gebelddoor( $_arrNumberInfo )
     
     if ( !preg_match( '/<div id="cijfer" style="color: .*?">(.*?)<div/si', $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$_arrNumberInfo['international']}";
+    return "[{$matches[1]}] unknown";
 
     /*
     <div id="cijfer" style="color: #e65700">2,5<div class="stars"><div class="current-rating" style="width: 20%"></div></div> <span>1 ervaring</span></div>

@@ -11,7 +11,7 @@ function fetch_telefoonnummerzoeken( $_arrNumberInfo )
 
     if ( !preg_match( '/<meta itemprop="ratingValue" content="(.*?)">/si', $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$_arrNumberInfo['international']}";
+    return "[{$matches[1]}] unknown";
 
     /*
     <meta itemprop="ratingValue" content="1">
