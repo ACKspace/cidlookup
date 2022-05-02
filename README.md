@@ -3,13 +3,15 @@ Caller ID lookup backend for FreeSWITCH's mod_cidlookup
 
 # installation
 * clone this repo
-* make sure you have a file `cid_config.php` in the parent directory with the following contents:
+* make sure you have a file `cid_config.php` in the web directory parent with the following contents:
 ```
 <?php
 const CID_API_KEY = "<your_desired_key>";
 ?>
 ```
-* create the tables that are needed within FreeSSWITHC:
+* make sure the web directory is writable by `www-data` or create writable `freeswitch_cidlookup.db` in the web directory
+* upload or create `contacts.vcf` in the web directory
+* create the tables that are needed within FreeSSWITCH:
 ```
 sudo -u freeswitch sqlite3 /var/lib/freeswitch/db/cidlookup.db "CREATE TABLE phonebook (id INTEGER PRIMARY KEY,name TEXT NOT NULL, type TEXT NOT NULL);"
 sudo -u freeswitch sqlite3 /var/lib/freeswitch/db/cidlookup.db "CREATE TABLE numbers (phonebook_id INTEGER,number TEXT NOT NULL);"
@@ -21,4 +23,5 @@ sudo -u freeswitch sqlite3 /var/lib/freeswitch/db/cidlookup.db "CREATE TABLE num
 * have the module loaded and try: `cidlookup 31457112345`
 
 # TODO
-look into CNAM / NAPTR E2U+X-ADDRESS
+* look into CNAM / NAPTR E2U+X-ADDRESS
+* store data in local database
