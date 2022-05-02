@@ -21,6 +21,25 @@ sudo -u freeswitch sqlite3 /var/lib/freeswitch/db/cidlookup.db "CREATE TABLE num
 <param name="url" value="https://domain.tld/cid.php?key=<your_desired_key>&amp;number=${caller_id_number}"/>
 ```
 * have the module loaded and try: `cidlookup 31457112345`
+* to activate cidlookup in the dialplan, use the following:
+```
+<action application="set" data="caller_id_name=${cidlookup(${caller_id_number})}"/>
+<action application="set" data="effective_caller_id_name=${caller_id_name}"/>
+```
+* it is also possible to set callee id name: `<action application="export" data="callee_id_name=${cidlookup($1)}" />`
+
+# NOTE
+When posting the name to a URI (like a message push service) from within FreeSWITCH, one can get the best results using lua (instead of a curl application):
+In the dialplan: `<action application="lua" data="call_post.lua"/>`
+and the script (replacing the spaces, located at `/usr/share/freeswitch/scripts/call_post.lua`):
+```
+if (session:ready()) then
+    -- replace spaces
+    local name = session:getVariable("caller_id_name"):gsub("%s+", "%%20")
+    session:execute("curl", "https://domain.tld/push.php?msg=Call%20from%3A%20" .. session:getVariable("caller_id_number") .. "%20('" .. name .. ")'")
+end
+```
+One might want to look into [url-encode](https://gist.github.com/liukun/f9ce7d6d14fa45fe9b924a3eed5c3d99)
 
 # TODO
 * look into CNAM / NAPTR E2U+X-ADDRESS
