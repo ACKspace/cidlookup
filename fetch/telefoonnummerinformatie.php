@@ -11,7 +11,7 @@ function fetch_telefoonnummerinformatie( $_arrNumberInfo )
     
     if ( !preg_match( '/<span class="number-details-simple-data-key">Score<\/span><span style="[^"]*">(.*?)<\/span>.*?(?!<span class="number-details-simple-data-key">Naam<\/span>(.*?)\s*<\/div>)/si', $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$matches[2]}";
+    return "[{$matches[1]}] {$matches[2]}";
 
     /*
     <div id="number-details-simple">

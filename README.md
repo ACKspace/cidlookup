@@ -9,7 +9,7 @@ Caller ID lookup backend for FreeSWITCH's mod_cidlookup
 const CID_API_KEY = "<your_desired_key>";
 ?>
 ```
-* make sure the web directory is writable by `www-data` or create writable `freeswitch_cidlookup.db` in the web directory
+* make sure the web directory is writable ( `chmod 775 .;chown :www-data .` or create writable `freeswitch_cidlookup.db` in the web directory
 * upload or create `contacts.vcf` in the web directory
 * create the tables that are needed within FreeSSWITCH:
 ```
@@ -34,8 +34,8 @@ In the dialplan: `<action application="lua" data="call_post.lua"/>`
 and the script (replacing the spaces, located at `/usr/share/freeswitch/scripts/call_post.lua`):
 ```
 if (session:ready()) then
-    -- replace spaces
-    local name = session:getVariable("caller_id_name"):gsub("%s+", "%%20")
+    -- replace spaces (into underscore for now)
+    local name = session:getVariable("caller_id_name"):gsub("%s+", "_")
     session:execute("curl", "https://domain.tld/push.php?msg=Call%20from%3A%20" .. session:getVariable("caller_id_number") .. "%20('" .. name .. ")'")
 end
 ```

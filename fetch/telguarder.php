@@ -11,7 +11,7 @@ function fetch_telguarder( $_arrNumberInfo )
         return false;
 
     $score = round($matches[1] / 18, 1 );
-    return "({$score}) {$_arrNumberInfo['international']}";
+    return "[{$score}] unknown";
 
     /*
     @keyframes guage-spin {

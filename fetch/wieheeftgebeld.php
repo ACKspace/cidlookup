@@ -10,7 +10,7 @@ function fetch_wieheeftgebeld( $_arrNumberInfo )
 
     if ( !preg_match( '/<span itemprop="ratingValue">(.*?)<\/span>/si', $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$_arrNumberInfo['international']}";
+    return "[{$matches[1]}] unknown";
 
     /*
 

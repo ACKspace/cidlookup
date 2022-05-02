@@ -8,7 +8,7 @@ function fetch_telefoonboek( $_arrNumberInfo )
     
     if ( !preg_match( '/<span itemprop="ratingValue">(.*?)<\/span>/si', $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$_arrNumberInfo['international']}";
+    return "[{$matches[1]}] unknown";
     
     /*
     <span itemprop="ratingValue">4</span>

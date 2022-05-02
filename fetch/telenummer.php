@@ -11,7 +11,7 @@ function fetch_telenummer( $_arrNumberInfo )
     
     if ( !preg_match( '/<div class="p-2 md:p-4 md:py-2 .*? rounded-lg text-white text-xs md:text-base font-semibold">\s*(.*?)\s*<\/div>/si', $strPage, $matches ))
         return false;
-    return "({$matches[1]}) {$_arrNumberInfo['international']}";
+    return "[{$matches[1]}] unknown";
     
     /*
     <div class="p-2 md:p-4 md:py-2 bg-green-500 rounded-lg text-white text-xs md:text-base font-semibold"> 
