@@ -93,10 +93,6 @@ if ( isset( $arrNumberInfo['international'] ))
     exit;
 }
 
-
-
-
-/////////////////////////////////////////////////////////////////////
 function fetchWebsiteResult( $_arrNumberInfo, $_bAll = false )
 {
     global $fetchList, $debug;
@@ -134,13 +130,9 @@ function normalizeNumber( $_strNumber )
 {
     $arrInfo = array();
 
-    // URI + to space "repair"
-    $_strNumber = preg_replace('/^ /', '+', $_strNumber);
-
-    // Remove dashes and whitespace from the number
     $_strNumber = preg_replace('/[\s-]/', '', $_strNumber);
 
-    // Extensions start with 1 or 9    
+    // Extensions start with 1 or 9 and can have any length
     if ( preg_match( "/^([19]\d+)/", $_strNumber, $matches ))
     {
         $arrInfo['local'] = $matches[1];
@@ -148,14 +140,13 @@ function normalizeNumber( $_strNumber )
         return $arrInfo;
     }
 
-    // Add region + country on quick dials
-    $_strNumber = preg_replace( "/^([2345678])/", COUNTRY.REGION.'$1', $_strNumber );
-
-    // Add country on national dials
-    $_strNumber = preg_replace( "/^(0)([^0].*)/", COUNTRY.'$2', $_strNumber );
-
-    // Replace + and 00 international symbols before parsing (include space for URI conversion
-    $_strNumber = preg_replace( "/^(\+|00)/", '', $_strNumber );
+    // Short and long local numbers (depending on region length)
+    if ( preg_match( '/^([2-8]\d{'.(8 - strlen( REGION )).'}$)/', $_strNumber, $matches ))
+        $_strNumber = COUNTRY.REGION.$matches[1];
+    elseif ( preg_match( '/^(?: |\+|00)(\d+)/', $_strNumber, $matches ))
+        $_strNumber = $matches[1];
+    elseif ( preg_match( '/^0([1-9]\d{6,9})$/', $_strNumber, $matches ))
+        $_strNumber = COUNTRY.$matches[1];
 
     $arrInfo['country'] = intval( substr( $_strNumber, 0, 2 ));
     $arrInfo['international'] = $_strNumber;
@@ -171,7 +162,6 @@ function normalizeNumber( $_strNumber )
 
     return $arrInfo;
 };
-
 
 
 function GetInfo( $_strNumber )
@@ -219,16 +209,7 @@ function _getInfo( $_arrNumber )
         }
     }
 
-    //print_r( $arrInfo[sizeof($arrInfo)-1] );
-
-    //echo "\n";
     return $strDetailedInfo;
-
-    //echo "<pre>";
-    //print_r( $arrNumbers );
-    //echo "</pre>";
-    //return "asdasdbad";
-    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
