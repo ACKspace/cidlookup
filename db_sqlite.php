@@ -14,6 +14,7 @@ function dbLookup( $_arrNumberInfo )
 {
     global $debug;
 
+    // TODO: handle file exception
     if (!$db = new SQLite3( MYSQL_DB.".db" ))
     {
         //if ( !isset( $debug ))

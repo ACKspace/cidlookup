@@ -14,6 +14,9 @@ function fetch_contacts( $_arrNumberInfo )
     // * open terminal
     // * devel-su -p /usr/bin/vcardconverter -e Downloads/mycontacts.vcf
 
+    if ( !is_readable( 'contacts.vcf') )
+        return false;
+
     $vCard = new vCard( 'contacts.vcf', false, array( 'Collapse' => true ) );
     foreach ( $vCard as $vCardPart )
     {
